@@ -1,0 +1,26 @@
+
+.vu_movement {
+ 
+  position: relative;
+  animation: example 1.5s infinite;
+
+}
+
+@keyframes example {
+  100%
+   {
+    top: 0;
+    opacity:1; 
+  }
+
+  0% {
+    top: 35px;
+    opacity:0; 
+  }
+}
+
+code{
+
+	font-size: 12px !important;
+	
+}

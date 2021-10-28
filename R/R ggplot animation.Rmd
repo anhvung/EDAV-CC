@@ -1,0 +1,146 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
+
+Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Ctrl+Shift+Enter*. 
+
+```{r}
+plot(cars)
+```
+
+Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Ctrl+Alt+I*.
+
+When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Ctrl+Shift+K* to preview the HTML file).
+
+The preview shows you a rendered HTML copy of the contents of the editor. Consequently, unlike *Knit*, *Preview* does not run any R code chunks. Instead, the output of the chunk when it was last run in the editor is displayed.
+
+
+install.packages('WDI')
+install.packages('gganimate')
+install.packages('gifski')
+install.packages('hrbrthemes')
+
+
+```{r}
+library(WDI)
+dat = WDI(indicator=c('NY.GDP.PCAP.KD','SP.DYN.LE00.IN'), country=c('US','FR','CN'), start=1960, end=2020)
+colnames(dat)
+```
+Transition reaveal
+bad
+good
+
+```{r}
+library(ggplot2)
+library(gganimate)
+library(gifski)
+library(hrbrthemes)
+library(tidyverse)
+extrafont::font_import()
+g1 <- dat %>%
+  ggplot( aes(y=NY.GDP.PCAP.KD, x=year, group=country, color=country)) +
+    geom_line(size=1.5) +
+    geom_point(size=5 ) +
+    ggtitle("GDP per capita, PPP (constant 2005 international $), 1960-2020") +
+    theme_ipsum() +
+    ylab("GDP per capita") +
+      # animation code
+    transition_reveal(year,)+
+    ease_aes('sine-in-out')
+# Save at gif:
+animate(g1, duration = 2, fps = 30, width = 500, height = 250, renderer = gifski_renderer())
+anim_save("animatedlines1.gif")
+
+animate(g1, duration = 10, fps = 15, width = 500, height = 250, renderer = gifski_renderer(),end_pause=45)
+anim_save("animatedlines2.gif")
+```
+*TRANSITION TIME
+year range
+interger
+
+```{r}
+
+g2 <- dat %>%
+  ggplot( aes(y=NY.GDP.PCAP.KD, x=country, color=country,fill=country), show.legend = FALSE) +
+    geom_bar(stat="identity")+
+    theme_ipsum() +
+    theme(legend.position="none")+
+    # animation code
+    labs(title = 'GDP per capita - Year: {frame_time}', x = 'Country', y = 'GDP per capita') +
+    transition_time(year, range = c(2000L,2019L))+
+    ease_aes('linear')
+    
+
+# Save at gif:
+animate(g2,duration = 10, fps = 15,  renderer = gifski_renderer(),end_pause=45)
+anim_save("animatedbars.gif")
+```
+```{r}
+# Make a ggplot, but add frame=year: one image per year
+dat = WDI(indicator=c('NY.GDP.PCAP.KD','GC.TAX.TOTL.GD.ZS','MS.MIL.XPND.ZS','MS.MIL.XPND.CD','HF.UHC.NOPX.ZS.Q5'),country=c('US','CN','ES','GB','JP'))
+WDIsearch('total population')
+dat <- dat %>%  mutate(gdp=NY.GDP.PCAP.KD * HF.UHC.NOPX.ZS.Q5 * 1000)
+
+g3 <- ggplot(dat, aes(NY.GDP.PCAP.KD, MS.MIL.XPND.CD, size = 2, color = country)) +
+  geom_point() +
+  scale_x_log10() +
+  scale_y_log10() +
+  geom_text(aes(label=country),hjust=0.5, vjust=-0.9)+
+  theme_bw() +
+  theme(legend.position="none")+
+  # animation code
+  labs(title = 'Year: {frame_time}', x = 'Total GDP', y = 'Military Expenditure (% of GDP)') +
+  transition_time(year,c(1970L,2017L)) +
+  ease_aes('linear') 
+
+# Save at gif:
+animate(g3,duration = 10, fps = 15,  renderer = gifski_renderer(),end_pause=45)
+anim_save("animatedcircles.gif")
+WDIsearch('hapiness')
+```
+```{r}
+
+
+
+```
+```{r}
+library(openintro)
+data("seattlepets")
+catdog.names <- seattlepets %>%  filter(species=="Cat" | species=="Dog") %>% filter(animal_name!="NA")  %>% count(animal_name) %>%top_n(30)  %>% mutate(Animal="Total")
+
+
+allnames <- factor(catdog.names$animal_name, levels = catdog.names$animal_name)
+
+cat.names <- seattlepets %>%  filter(species=="Cat" & animal_name %in% levels(allnames)) %>% filter(animal_name!="NA")  %>% count(animal_name) %>%top_n(30) %>%mutate(Animal="Cat")
+dog.names <- seattlepets %>%  filter(species=="Dog" & animal_name %in% levels(allnames)) %>% filter(animal_name!="NA")  %>% count(animal_name) %>%top_n(30)  %>% mutate(Animal="Dog")
+
+categories_name <- rbind(catdog.names,dog.names) %>% rbind(.,cat.names)
+g4 <- ggplot(categories_name, aes(x = n, y = fct_reorder2(animal_name, Animal == "Total", n,
+                                                   .desc = FALSE), color = Animal)) +
+  geom_point(aes(colour = Animal, group = 1L)) +
+  labs(title = "Now showing {closest_state}", x = "Occurences",  y = "Name")+
+    transition_states(Animal, transition_length = 2, state_length = 2)+
+    ease_aes('cubic-in-out')
+
+# Save at gif:
+animate(g4,duration = 10, fps = 10,  renderer = gifski_renderer(),end_pause=10)
+anim_save("states.gif")
+```
+
+```{r}
+categories_name <- rbind(cat.names,dog.names)
+g4 <- ggplot(categories_name, aes(x = n, y = fct_reorder2(animal_name, Animal == "Total", n,
+                                                   .desc = FALSE), color = Animal)) +
+  geom_point(aes(colour = Animal, group = 1L)) +
+  labs(title = "Now showing {closest_state}", x = "Occurences",  y = "Name")+
+    transition_states(Animal, transition_length = 2, state_length = 1)+
+  ease_aes('cubic-in-out')
+   
+
+animate(g4,duration = 5, fps = 10,  renderer = gifski_renderer(),end_pause=0)
+anim_save("noease.gif")
+```
+
