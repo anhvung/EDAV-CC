@@ -60,6 +60,25 @@ anim_save("animatedlines2.gif")
 *TRANSITION TIME
 year range
 interger
+```{r}
+library(ggplot2)
+library(gganimate)
+library(gifski)
+library(hrbrthemes)
+library(tidyverse)
+library(svglite)
+g1 <- dat %>%
+  ggplot( aes(y=NY.GDP.PCAP.KD, x=year, group=country, color=country)) +
+    geom_line(size=1.5) +
+    geom_point(size=5,data=subset(dat, (year+1) %% 10 == 1) ) +
+    ggtitle("GDP per capita, PPP (constant 2005 international $), 1960-2020") +
+    theme_ipsum() +
+    ylab("GDP per capita") 
+
+#This actually save the plot in a image
+ggsave(file="vectorized.svg", plot=g1, width=10, height=8)
+```
+
 
 ```{r}
 
@@ -137,10 +156,10 @@ g4 <- ggplot(categories_name, aes(x = n, y = fct_reorder2(animal_name, Animal ==
   geom_point(aes(colour = Animal, group = 1L)) +
   labs(title = "Now showing {closest_state}", x = "Occurences",  y = "Name")+
     transition_states(Animal, transition_length = 2, state_length = 1)+
-  ease_aes('cubic-in-out')
+  ease_aes('cubic-in')
    
 
 animate(g4,duration = 5, fps = 10,  renderer = gifski_renderer(),end_pause=0)
-anim_save("noease.gif")
+anim_save("cubic-in.gif")
 ```
 

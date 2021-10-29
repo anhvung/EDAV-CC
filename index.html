@@ -188,8 +188,8 @@ pre code {
 		<!-- Header -->
 			<section id="header">
 				<header>
-					<span class="image avatar"><img src="images/avatar.jpg" alt="" /></span>
-					<h1 id="logo"><a href="#">Animation and Motion Graphics	</a></h1>
+					<span class="image avatar"><img src="images/pp.gif" alt="" /></span>
+					<h1 id="logo"><a>Animation and Motion Graphics	</a></h1>
 					<p>A basic guide on graph animation in R Studio, and After Effects</p>
 				</header>
 				<nav id="nav">
@@ -217,7 +217,7 @@ pre code {
 						<!-- One -->
 							<section id="one">
 								<div class="image main" data-position="center">
-									<img src="images/banner.jpg" alt="" />
+									<img src="images/banner.gif" alt="" />
 								</div>
 								<div class="container">
 									<header class="major">
@@ -246,7 +246,7 @@ pre code {
 														<ul class="feature-icons">
 												<li class="icon solid fa-code" style="margin-left: 80px"><strong>1.1.1 transition_state(var)</strong></li>
 											</ul>
-											<a href="#" class="image"><img src="R/states.gif" alt="" /></a>
+											<a  class="image"><img src="R/states.gif" alt="" /></a>
 											<div class="inner">
 												
 												<p>transition_state() cycles between the values of specified variable.</p>
@@ -279,8 +279,8 @@ anim_save(&quot;states.gif&quot;)</code></pre>
 											<ul class="feature-icons">
 										<li class="icon solid fa-code" style="margin-left: 80px"><strong>1.1.2 transition_time()</strong></li>
 									</ul>
-											<a href="#" class="image"><img src="R/animatedcircles.gif" alt="" /></a>
-											<a href="#" class="image"><img src="R/animatedbars.gif" alt="" /></a>
+											<a class="image"><img src="R/animatedcircles.gif" alt="" /></a>
+											<a  class="image"><img src="R/animatedbars.gif" alt="" /></a>
 											<div class="inner">
 												
 												
@@ -328,11 +328,11 @@ anim_save(&quot;animatedbars.gif&quot;)</code></pre>
 											<ul class="feature-icons">
 											<li class="icon solid fa-code" style="margin-left: 80px"><strong>1.1.3 transition_reveal()</strong></li>
 										</ul>
-												<a href="#" class="image"><img src="R/animatedlines2.gif" alt="" /></a>
+												<a  class="image"><img src="R/animatedlines2.gif" alt="" /></a>
 
 											<div class="inner">
 												
-												<p>This transition allows you gradually show the data.</p>
+												<p>This transition allows to show the data gradually.</p>
 											</div>
 										</article>
 										<pre class="r"><code>
@@ -366,25 +366,25 @@ anim_save(&quot;animatedlines2.gif&quot;)</code></pre>
 											</ul>
 											<p>ease_aes() changes the transition speed between states depending on the specified function. The '-in' and '-out' restrict the effect on the start or end of transitions.</p>
 											
-												<a href="#" class="image"><img src="R/noease.gif" alt="" /></a>
+												<a class="image"><img src="R/noease.gif" alt="" /></a>
 
 											<div class="inner">
 												
 												<p>No ease_aes</p>
 											</div>
-											<a href="#" class="image"><img src="R/cubic.gif" alt="" /></a>
+											<a  class="image"><img src="R/cubic.gif" alt="" /></a>
 
 											<div class="inner">
 												
 												<p> ease_aes('cubic-in-out')</p>
 											</div>
-											<a href="#" class="image"><img src="R/cubic-out.gif" alt="" /></a>
+											<a  class="image"><img src="R/cubic-out.gif" alt="" /></a>
 
 											<div class="inner">
 												
 												<p> ease_aes('cubic-out')</p>
 											</div>
-											<a href="#" class="image"><img src="R/cubic-in.gif" alt="" /></a>
+											<a  class="image"><img src="R/cubic-in.gif" alt="" /></a>
 
 											<div class="inner">
 												
@@ -400,19 +400,22 @@ anim_save(&quot;animatedlines2.gif&quot;)</code></pre>
 											</ul>
 											<p>By default the output is a series of PNGs. animate(renderer = gifski_renderer()) is used to render the animation to a gif file. end_pause parameter pauses the animation for a certain amount of frames. 'Duration' and Framarate can be changed with 'duration' and 'fps'</p>
 											
-												<a href="#" class="image"><img src="R/animatedlines1.gif" alt="" /></a>
+												<a class="image"><img src="R/animatedlines1.gif" alt="" /></a>
 
 											<div class="inner">
 												
 												<p>Bad animation : it has no pause and the duration is too low.</p>
 											</div>
-											<a href="#" class="image"><img src="R/animatedlines2.gif" alt="" /></a>
+											<a  class="image"><img src="R/animatedlines2.gif" alt="" /></a>
 
 											<div class="inner">
 												
 												<p>A better animation</p>
 											
 										</article>
+										<pre class="r"><code>animate(g1,duration = 10, fps = 15,  renderer = gifski_renderer(),end_pause=45)
+anim_save(&quot;filename.gif&quot;)
+</code></pre>
 
 
 
@@ -438,30 +441,85 @@ anim_save(&quot;animatedlines2.gif&quot;)</code></pre>
 						<!-- Three -->
 							<section id="three">
 								<div class="container">
-									<h3>A Few Accomplishments</h3>
-									<p>Integer eu ante ornare amet commetus vestibulum blandit integer in curae ac faucibus integer non. Adipiscing cubilia elementum integer. Integer eu ante ornare amet commetus.</p>
+									<h3>2. From R studio to After Effects</h3>
+									
+									
 									<div class="features">
 										<article>
-											<a href="#" class="image"><img src="images/pic01.jpg" alt="" /></a>
+											<a  class="image"><img src="images/final.gif" alt="" /></a>
 											<div class="inner">
-												<h4>Possibly broke spacetime</h4>
-												<p>Integer eu ante ornare amet commetus vestibulum blandit integer in curae ac faucibus integer adipiscing ornare amet.</p>
+												
+												<h5>Preview</h5>
+											</div>
+									</article>
+									<ul class="feature-icons">
+										<li class="icon solid fa-code"><strong>2.1 Exporting graphs</strong></li>
+									</ul>
+										<p>ggplot2 graphs can be saved in a vectorized .svg format with the svglite library.</p>
+										<pre class="r"><code>library(svglite)
+g1 &lt;- dat %&gt;%
+  ggplot( aes(y=NY.GDP.PCAP.KD, x=year, group=country, color=country)) +
+    geom_line(size=1.5) +
+    geom_point(size=5,data=subset(dat, (year+1) %% 10 == 1) ) +
+    ggtitle(&quot;GDP per capita, PPP (constant 2005 international $), 1960-2020&quot;) +
+    theme_ipsum() +
+    ylab(&quot;GDP per capita&quot;) 
+
+#Saving the file 
+ggsave(file=&quot;test.svg&quot;, plot=g1, width=10, height=8)</code></pre>
+										<article>
+											<a  class="image"><img src="images/illustrator1.PNG" alt="" /></a>
+											<a  class="image"><img src="images/illustrator2.PNG" alt="" /></a>
+											<div class="inner">
+												
+												<p>.svg files cannot be opened by After Effects, so they can to be converted to an illustrator file inside Adobe illustrator.</p>
+											</div>
+										</article>
+										<ul class="feature-icons">
+										<li class="icon solid fa-code"><strong>2.1 Inside After Effects</strong></li>
+									</ul>
+										<article>
+											<a  class="image"><img src="images/ae1.PNG" alt="" /></a>
+											<div class="inner">
+												
+												<p>The saved file can then be dragged into After Effects.</p>
 											</div>
 										</article>
 										<article>
-											<a href="#" class="image"><img src="images/pic02.jpg" alt="" /></a>
+											<a  class="image"><img src="images/Solid.png" alt="" /></a>
 											<div class="inner">
-												<h4>Terraformed a small moon</h4>
-												<p>Integer eu ante ornare amet commetus vestibulum blandit integer in curae ac faucibus integer adipiscing ornare amet.</p>
+												
+												<p>Because the layer is transparent, the backgroung color is going to be dark, this can be changed by adding a solid layer behind the graph.</p>
 											</div>
 										</article>
 										<article>
-											<a href="#" class="image"><img src="images/pic03.jpg" alt="" /></a>
+											<a  class="image"><img src="images/ae (3).png" alt="" /></a>
 											<div class="inner">
-												<h4>Snapped dark matter in the wild</h4>
-												<p>Integer eu ante ornare amet commetus vestibulum blandit integer in curae ac faucibus integer adipiscing ornare amet.</p>
+												
+												<p>To play with the shapes and lines, the different layers can be extracted by right clicking the graph layer and select create -> Create Shapres from Vector Layer</p>
 											</div>
 										</article>
+
+
+										<article>
+											<a  class="image"><img src="images/ae4.PNG" alt="" /></a>
+											<div class="inner">
+												
+												<p>Inside the created vectorized outlines layer, the different shapes can be modified with standards After Effects tools.</p>
+											</div>
+										</article>
+
+											<article>
+											<a  class="image"><img src="images/trim.png" alt="" /></a>
+												<a  class="image"><img src="images/trim1.png" alt="" /></a>
+											<div class="inner">
+												
+												<p>For instance, adding trim path allows to animate the lines, a point's size can be changed with keyframes etc... </p>
+											</div>
+										</article>
+										<h4>Final result after precomp and scale automation</h4>
+
+										<a  class="image"><img src="images/final.gif" alt="" /></a>
 									</div>
 								</div>
 							</section>
